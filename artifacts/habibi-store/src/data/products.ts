@@ -7,6 +7,7 @@ export interface Product {
   features?: string[];
   popular?: boolean;
   priceLabel?: string;
+  badge?: "TERLARIS" | "BARU" | "PROMO";
 }
 
 export interface BotTier {
@@ -47,8 +48,8 @@ export interface NokosProduct {
 }
 
 export const panelProducts: Product[] = [
-  { id: 'panel-1gb', name: 'RAM 1GB', price: 1000, category: 'panel', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
-  { id: 'panel-2gb', name: 'RAM 2GB', price: 2000, category: 'panel', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
+  { id: 'panel-1gb', name: 'RAM 1GB', price: 1000, category: 'panel', badge: 'TERLARIS', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
+  { id: 'panel-2gb', name: 'RAM 2GB', price: 2000, category: 'panel', badge: 'BARU', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
   { id: 'panel-3gb', name: 'RAM 3GB', price: 3000, category: 'panel', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
   { id: 'panel-4gb', name: 'RAM 4GB', price: 4000, category: 'panel', features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection'] },
   { id: 'panel-5gb', name: 'RAM 5GB', price: 5000, category: 'panel', popular: true, features: ['Server 24 Jam Online', 'Anti Delete / Anti Rusuh', 'Anti Maling Script', 'Tidak Boros Kuota', 'Anti DDOS Protection', 'Priority Support'] },

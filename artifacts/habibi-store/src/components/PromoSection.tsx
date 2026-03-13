@@ -1,10 +1,45 @@
-import { useState } from "react";
-import { FaWhatsapp, FaCopy, FaCheck, FaGift, FaClock, FaUserPlus } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaWhatsapp, FaCopy, FaCheck, FaGift, FaClock, FaUserPlus, FaFire } from "react-icons/fa";
 
 const PROMO_CODE = "NEWHABIBI20";
 
+const PROMO_END = new Date();
+PROMO_END.setDate(PROMO_END.getDate() + 7);
+
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = Math.max(0, target.getTime() - Date.now());
+    return {
+      days: Math.floor(diff / 86400000),
+      hours: Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+    };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function Digit({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="bg-black/40 border border-white/10 rounded-xl w-14 h-14 flex items-center justify-center">
+        <span className="text-white font-bold text-2xl font-mono tabular-nums">
+          {String(value).padStart(2, "0")}
+        </span>
+      </div>
+      <span className="text-white/40 text-[10px] mt-1 uppercase tracking-widest">{label}</span>
+    </div>
+  );
+}
+
 export default function PromoSection() {
   const [copied, setCopied] = useState(false);
+  const { days, hours, minutes, seconds } = useCountdown(PROMO_END);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(PROMO_CODE);
@@ -21,14 +56,14 @@ export default function PromoSection() {
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#1abc9c]/10 rounded-full" />
             <div className="absolute -bottom-10 -left-10 w-56 h-56 bg-[#1abc9c]/10 rounded-full" />
-            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-white/3 rounded-full" />
+            <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-white/[0.02] rounded-full" />
           </div>
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center p-8 md:p-10">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="bg-[#e74c3c] text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 animate-pulse">
-                  <FaClock className="text-[10px]" /> PENAWARAN TERBATAS
+                  <FaFire className="text-[10px]" /> PENAWARAN TERBATAS
                 </div>
               </div>
 
@@ -48,18 +83,26 @@ export default function PromoSection() {
                 Daftar sebagai pelanggan baru Habibi Store dan dapatkan diskon <strong className="text-white">20%</strong> untuk pembelian pertama Anda. Berlaku untuk semua layanan panel, bot, script, NOKOS, dan sosmed.
               </p>
 
-              <div className="flex flex-wrap gap-3 text-sm text-white/70">
-                <div className="flex items-center gap-1.5">
-                  <FaCheck className="text-[#1abc9c] text-xs" />
-                  Berlaku semua layanan
+              <div className="flex flex-wrap gap-3 text-sm text-white/70 mb-6">
+                {["Berlaku semua layanan", "Hanya 1x per pengguna", "Tidak ada minimum order"].map((t) => (
+                  <div key={t} className="flex items-center gap-1.5">
+                    <FaCheck className="text-[#1abc9c] text-xs" /> {t}
+                  </div>
+                ))}
+              </div>
+
+              <div>
+                <div className="flex items-center gap-1.5 text-white/50 text-xs mb-3">
+                  <FaClock className="text-[#e74c3c]" /> Penawaran berakhir dalam:
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <FaCheck className="text-[#1abc9c] text-xs" />
-                  Hanya 1x per pengguna
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <FaCheck className="text-[#1abc9c] text-xs" />
-                  Tidak ada minimum order
+                <div className="flex items-center gap-3">
+                  <Digit value={days} label="Hari" />
+                  <span className="text-white/40 font-bold text-xl mb-4">:</span>
+                  <Digit value={hours} label="Jam" />
+                  <span className="text-white/40 font-bold text-xl mb-4">:</span>
+                  <Digit value={minutes} label="Menit" />
+                  <span className="text-white/40 font-bold text-xl mb-4">:</span>
+                  <Digit value={seconds} label="Detik" />
                 </div>
               </div>
             </div>

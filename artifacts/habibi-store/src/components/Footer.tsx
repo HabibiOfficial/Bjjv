@@ -44,6 +44,7 @@ export default function Footer() {
                 { label: "Script Bot", href: "#script" },
                 { label: "NOKOS WhatsApp", href: "#nokos" },
                 { label: "Jasa Sosial Media", href: "#sosmed" },
+                { label: "🤝 Program Reseller", href: "#reseller" },
                 { label: "Kontak & Support", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>

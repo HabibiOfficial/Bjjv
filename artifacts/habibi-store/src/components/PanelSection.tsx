@@ -1,9 +1,16 @@
-import { FaCheck, FaCartPlus, FaWhatsapp, FaStar } from "react-icons/fa";
+import { FaCheck, FaCartPlus, FaWhatsapp, FaStar, FaFire, FaBolt } from "react-icons/fa";
 import { panelProducts, Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
+const badgeConfig = {
+  TERLARIS: { label: "TERLARIS", icon: FaFire, className: "bg-[#e74c3c] text-white" },
+  BARU: { label: "BARU", icon: FaBolt, className: "bg-blue-500 text-white" },
+  PROMO: { label: "PROMO", icon: FaStar, className: "bg-yellow-400 text-[#1a252f]" },
+};
+
 function PanelCard({ product }: { product: Product }) {
   const { addItem, setIsOpen } = useCart();
+  const badge = product.badge ? badgeConfig[product.badge] : null;
 
   const handleBuy = () => {
     const msg = `Halo, saya ingin membeli ${product.name} - Rp ${product.price.toLocaleString("id-ID")}`;
@@ -16,12 +23,25 @@ function PanelCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col ${product.popular ? "border-2 border-[#1abc9c] ring-2 ring-[#1abc9c]/20 scale-105" : "border border-gray-100"}`}>
+    <div
+      className={`relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col ${
+        product.popular
+          ? "border-2 border-[#1abc9c] ring-2 ring-[#1abc9c]/20 scale-105"
+          : "border border-gray-100"
+      }`}
+    >
       {product.popular && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1abc9c] text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#1abc9c] text-white text-xs font-bold px-4 py-1 rounded-full flex items-center gap-1 whitespace-nowrap">
           <FaStar className="text-yellow-300 text-xs" /> POPULER
         </div>
       )}
+
+      {badge && !product.popular && (
+        <div className={`absolute -top-3 left-4 ${badge.className} text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 whitespace-nowrap`}>
+          <badge.icon className="text-[10px]" /> {badge.label}
+        </div>
+      )}
+
       <div className="p-6 flex flex-col flex-1">
         <h3 className="text-xl font-bold text-[#1a252f] mb-1">{product.name}</h3>
         <div className="text-3xl font-bold text-[#e74c3c] mb-4">
