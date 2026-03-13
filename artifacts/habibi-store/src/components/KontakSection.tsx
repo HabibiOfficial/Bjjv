@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaTelegram, FaUsers, FaStar, FaCircle, FaHeadset, FaTools, FaCheckCircle } from "react-icons/fa";
+import { FaWhatsapp, FaTelegram, FaStar, FaCircle, FaHeadset, FaTools, FaCheckCircle } from "react-icons/fa";
 
 const contacts = [
   {
@@ -10,27 +10,11 @@ const contacts = [
     badge: "Aktif 24/7",
   },
   {
-    icon: FaWhatsapp,
-    color: "bg-[#25D366]",
-    label: "WhatsApp Cadangan",
-    value: "6285187443525",
-    href: "https://wa.me/6285187443525?text=Halo+Habibi+Store%2C+saya+ingin+order",
-    badge: null,
-  },
-  {
     icon: FaTelegram,
     color: "bg-[#229ED9]",
     label: "Telegram",
     value: "@habibihosting10",
     href: "https://t.me/habibihosting10",
-    badge: null,
-  },
-  {
-    icon: FaUsers,
-    color: "bg-[#1abc9c]",
-    label: "Grup Marketplace",
-    value: "Habibi Store",
-    href: "https://chat.whatsapp.com/BrS9ir3Ck6oDTK1RA0iGJp",
     badge: null,
   },
   {
