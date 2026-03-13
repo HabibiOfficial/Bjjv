@@ -43,7 +43,7 @@ export default function Header({ onSalesOpen, onSearchOpen }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-8 left-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? "bg-[#1a252f]/98 backdrop-blur-md py-2 shadow-2xl"
             : "bg-[#1a252f] py-3 shadow-lg"
@@ -121,7 +121,7 @@ export default function Header({ onSalesOpen, onSearchOpen }: HeaderProps) {
       </header>
 
       {menuOpen && (
-        <div className="fixed top-[60px] left-0 w-full h-[calc(100vh-60px)] bg-[#1a252f] z-40 flex flex-col items-center justify-start pt-10 gap-4">
+        <div className="fixed top-[92px] left-0 w-full h-[calc(100vh-92px)] bg-[#1a252f] z-40 flex flex-col items-center justify-start pt-10 gap-4">
           {navLinks.map((link) => (
             <a
               key={link.href}

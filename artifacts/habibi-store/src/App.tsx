@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CartProvider } from "@/context/CartContext";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import HeroSlider from "@/components/HeroSlider";
 import StatsSection from "@/components/StatsSection";
@@ -9,6 +10,10 @@ import BotSection from "@/components/BotSection";
 import ScriptSection from "@/components/ScriptSection";
 import NokosSection from "@/components/NokosSection";
 import SosmedSection from "@/components/SosmedSection";
+import HowToOrderSection from "@/components/HowToOrderSection";
+import PaymentSection from "@/components/PaymentSection";
+import TestimoniSection from "@/components/TestimoniSection";
+import FAQSection from "@/components/FAQSection";
 import KontakSection from "@/components/KontakSection";
 import Footer from "@/components/Footer";
 import CartModal from "@/components/CartModal";
@@ -23,6 +28,7 @@ export default function App() {
   return (
     <CartProvider>
       <div className="min-h-screen">
+        <AnnouncementBar />
         <Header
           onSalesOpen={() => setSalesOpen(true)}
           onSearchOpen={() => setSearchOpen(true)}
@@ -35,6 +41,10 @@ export default function App() {
         <ScriptSection />
         <NokosSection />
         <SosmedSection />
+        <HowToOrderSection />
+        <PaymentSection />
+        <TestimoniSection />
+        <FAQSection />
         <KontakSection />
         <Footer />
         <CartModal />

@@ -39,7 +39,7 @@ export default function HeroSlider() {
   const next = () => setCurrent((c) => (c + 1) % slides.length);
 
   return (
-    <section id="home" className="relative mt-[60px] h-[480px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-b-2xl shadow-2xl">
+    <section id="home" className="relative mt-[92px] h-[480px] sm:h-[520px] lg:h-[600px] overflow-hidden rounded-b-2xl shadow-2xl">
       {slides.map((slide, i) => (
         <div
           key={i}

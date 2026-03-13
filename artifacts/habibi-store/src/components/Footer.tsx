@@ -60,10 +60,10 @@ export default function Footer() {
             <ul className="space-y-2 text-white/60 text-sm">
               {[
                 { label: "Beranda", href: "#home" },
-                { label: "Kategori", href: "#categories" },
-                { label: "Harga Panel", href: "#panel" },
-                { label: "Sewa Bot", href: "#bot" },
-                { label: "Sosial Media", href: "#sosmed" },
+                { label: "Cara Order", href: "#cara-order" },
+                { label: "Metode Pembayaran", href: "#pembayaran" },
+                { label: "Testimoni", href: "#testimoni" },
+                { label: "FAQ", href: "#faq" },
                 { label: "Kontak", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>
@@ -78,10 +78,17 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-base mb-4 pb-2 border-b border-[#1abc9c] inline-block">Informasi</h3>
             <ul className="space-y-2 text-white/60 text-sm">
-              {["Syarat & Ketentuan", "Kebijakan Privasi", "Cara Order", "Pembayaran", "Testimoni", "FAQ"].map((label) => (
-                <li key={label}>
-                  <a href="#contact" className="hover:text-[#1abc9c] transition-colors">
-                    {label}
+              {[
+                { label: "Cara Order", href: "#cara-order" },
+                { label: "Metode Pembayaran", href: "#pembayaran" },
+                { label: "Testimoni Pelanggan", href: "#testimoni" },
+                { label: "FAQ / Pertanyaan", href: "#faq" },
+                { label: "Kontak & Support", href: "#contact" },
+                { label: "Kategori Layanan", href: "#categories" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="hover:text-[#1abc9c] transition-colors">
+                    {link.label}
                   </a>
                 </li>
               ))}
