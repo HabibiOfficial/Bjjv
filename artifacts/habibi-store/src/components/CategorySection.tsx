@@ -29,7 +29,7 @@ export default function CategorySection() {
             return (
               <a
                 key={cat.id}
-                href={`#${cat.id === 'script' || cat.id === 'nokos' ? 'bot' : cat.id}`}
+                href={`#${cat.id === 'other' ? 'admin' : cat.id}`}
                 className="bg-white rounded-xl p-5 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer"
               >
                 <div className="w-14 h-14 bg-gradient-to-br from-[#1abc9c] to-[#3498db] rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

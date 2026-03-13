@@ -1,94 +1,130 @@
-import { FaCheck, FaCartPlus, FaWhatsapp, FaTiktok, FaInstagram, FaWhatsapp as FaWA } from "react-icons/fa";
-import { sosmedProducts, Product } from "@/data/products";
+import { useState } from "react";
+import { FaTiktok, FaInstagram, FaWhatsapp, FaCartPlus, FaHeart, FaEye, FaUserPlus } from "react-icons/fa";
+import { sosmedCategories, SosmedCategory } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
-const platformIcons: Record<string, React.ElementType> = {
-  "tiktok-like": FaTiktok,
-  "tiktok-views": FaTiktok,
-  "tiktok-followers": FaTiktok,
-  "ig-followers": FaInstagram,
-  "wa-channel": FaWA,
+const typeIcon: Record<string, React.ElementType> = {
+  Likes: FaHeart,
+  Views: FaEye,
+  Followers: FaUserPlus,
 };
 
-const platformColors: Record<string, string> = {
-  "tiktok-like": "from-black to-pink-600",
-  "tiktok-views": "from-black to-pink-600",
-  "tiktok-followers": "from-black to-pink-600",
-  "ig-followers": "from-orange-400 to-pink-600",
-  "wa-channel": "from-[#25D366] to-[#128C7E]",
+const platformIcon: Record<string, React.ElementType> = {
+  TikTok: FaTiktok,
+  Instagram: FaInstagram,
+  "WA Channel": FaWhatsapp,
 };
 
-function SosmedCard({ product }: { product: Product }) {
+const platforms = [
+  { key: "TikTok", label: "TikTok", grad: "from-black to-pink-600" },
+  { key: "Instagram", label: "Instagram", grad: "from-orange-400 to-pink-600" },
+  { key: "WA Channel", label: "WA Channel", grad: "from-[#25D366] to-[#128C7E]" },
+];
+
+function CategoryTable({ cat }: { cat: SosmedCategory }) {
   const { addItem, setIsOpen } = useCart();
-  const Icon = platformIcons[product.id] || FaTiktok;
-  const colorClass = platformColors[product.id] || "from-[#1abc9c] to-[#3498db]";
+  const Icon = typeIcon[cat.type] || FaHeart;
 
-  const handleBuy = () => {
-    const msg = `Halo, saya ingin membeli jasa ${product.name} - ${product.priceLabel || `Rp ${product.price.toLocaleString("id-ID")}`}`;
+  const handleOrder = (label: string, price: number) => {
+    const msg = `Halo, saya ingin memesan *${cat.platform} ${cat.type} - ${label}*\nHarga: Rp ${price.toLocaleString("id-ID")}`;
     window.open(`https://wa.me/628131919213?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
-  const handleCart = () => {
-    addItem({ id: product.id, name: product.name, price: product.price });
+  const handleCart = (label: string, price: number) => {
+    addItem({ id: `${cat.id}-${label}`, name: `${cat.platform} ${cat.type} ${label}`, price });
     setIsOpen(true);
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 flex flex-col border border-gray-100">
-      <div className="p-6 flex flex-col flex-1">
-        <div className={`w-14 h-14 bg-gradient-to-br ${colorClass} rounded-full flex items-center justify-center mb-4`}>
-          <Icon className="text-white text-xl" />
+    <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+      <div className={`bg-gradient-to-r ${cat.colorClass} p-4 flex items-center gap-3`}>
+        <Icon className="text-white text-xl" />
+        <div>
+          <h3 className="text-white font-bold">{cat.platform} {cat.type}</h3>
+          <p className="text-white/80 text-xs">{cat.items.length} paket tersedia</p>
         </div>
-        <h3 className="text-lg font-bold text-[#1a252f] mb-2">{product.name}</h3>
-        <p className="text-gray-500 text-sm mb-3 flex-1">{product.description}</p>
-        <div className="text-xl font-bold text-[#e74c3c] mb-4">
-          {product.priceLabel || `Rp ${product.price.toLocaleString("id-ID")}`}
-        </div>
-        <ul className="space-y-1 mb-5">
-          {product.features?.map((f) => (
-            <li key={f} className="flex items-center gap-2 text-gray-600 text-sm">
-              <FaCheck className="text-[#1abc9c] shrink-0 text-xs" />
-              {f}
-            </li>
-          ))}
-        </ul>
-        <div className="flex gap-2 mt-auto">
-          <button
-            onClick={handleBuy}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#1abc9c] hover:bg-[#16a085] text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-200"
-          >
-            <FaWhatsapp /> Pesan
-          </button>
-          <button
-            onClick={handleCart}
-            className="w-11 h-11 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-[#1a252f] rounded-xl transition-all duration-200"
-          >
-            <FaCartPlus />
-          </button>
-        </div>
+      </div>
+      <div className="divide-y divide-gray-50">
+        {cat.items.map((item, i) => (
+          <div key={i} className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors group">
+            <span className="text-sm font-medium text-[#1a252f]">{item.label}</span>
+            <div className="flex items-center gap-3">
+              <span className="font-bold text-[#e74c3c] text-sm">
+                Rp {item.price.toLocaleString("id-ID")}
+              </span>
+              <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => handleOrder(item.label, item.price)}
+                  className="flex items-center gap-1 bg-[#1abc9c] hover:bg-[#16a085] text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg transition-all"
+                >
+                  <FaWhatsapp className="text-xs" /> Pesan
+                </button>
+                <button
+                  onClick={() => handleCart(item.label, item.price)}
+                  className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-[#1a252f] text-xs font-semibold px-2 py-1.5 rounded-lg transition-all"
+                >
+                  <FaCartPlus className="text-xs" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 export default function SosmedSection() {
+  const [activePlatform, setActivePlatform] = useState("TikTok");
+  const filtered = sosmedCategories.filter(c => c.platform === activePlatform);
+
   return (
-    <section id="sosmed" className="py-20 bg-gray-50">
+    <section id="sosmed" className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-[#1a252f] inline-block relative mb-4">
-            📱 Jasa Sosial Media
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#1abc9c] bg-[#1abc9c]/10 px-4 py-1 rounded-full mb-3">
+            Jasa Sosmed
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a252f] relative inline-block mb-4">
+            💫 Suntik Sosial Media
             <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-[#1abc9c] rounded-full" />
           </h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-            Tingkatkan engagement akun sosial media Anda dengan layanan berkualitas untuk TikTok, Instagram, dan WhatsApp Channel.
+          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+            Tingkatkan engagement akun Anda dengan layanan Like, Views, dan Followers berkualitas untuk TikTok, Instagram, dan WhatsApp Channel. Layanan permanen &amp; proses cepat.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {sosmedProducts.map((p) => (
-            <SosmedCard key={p.id} product={p} />
+        <div className="flex flex-wrap justify-center gap-3 mb-10">
+          {platforms.map((p) => {
+            const Icon = platformIcon[p.key];
+            const isActive = activePlatform === p.key;
+            return (
+              <button
+                key={p.key}
+                onClick={() => setActivePlatform(p.key)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all duration-200 ${
+                  isActive
+                    ? `bg-gradient-to-r ${p.grad} text-white shadow-lg scale-105`
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                <Icon className="text-base" />
+                {p.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((cat) => (
+            <CategoryTable key={cat.id} cat={cat} />
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <p className="text-gray-500 text-sm">
+            ✅ Semua layanan bersifat <strong>permanen</strong> · ⚡ Proses cepat dalam hitungan menit · 🔒 Aman &amp; terpercaya
+          </p>
         </div>
       </div>
     </section>

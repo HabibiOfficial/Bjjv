@@ -94,3 +94,19 @@ Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHea
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
+
+### `artifacts/habibi-store` (`@workspace/habibi-store`)
+
+React + Vite + Tailwind v4 frontend e-commerce site for Habibi Store. Purely frontend — no backend required. All orders go through WhatsApp links.
+
+**Key contacts**: WA `628131919213` (primary), `6285187443525` (backup), Telegram `@habibihosting10`
+**Design**: Dark navy `#1a252f`, teal `#1abc9c`, red accent `#e74c3c`, fonts: Poppins/Montserrat
+
+**Sections & product data** (`src/data/products.ts`):
+- `panelProducts` — Panel Pterodactyl RAM 1GB–10GB, Unlimited (Rp12k), Reseller (Rp15k)
+- `botProducts` — Bot Jaga Grup (6 tiers), Bot Pushkontak (4 tiers), Bot JPM (4 tiers); each with selectable tiers in `BotSection`
+- `scriptProducts` — Script JPM, CPanel, Jaga Grup, Pushkontak (tanpa encrypt)
+- `nokosProducts` — Virtual numbers: ID Rp7k, VE/AF/PH/IR Rp10k, USA Rp25k
+- `sosmedCategories` — TikTok (Likes, Views, Followers), Instagram (Likes, Views, Followers), WA Channel (Followers); platform tabs in `SosmedSection`
+
+**Components**: Header, HeroSlider, StatsSection, CategorySection, SearchResults, PanelSection, BotSection, ScriptSection, NokosSection, SosmedSection, AdminSection, ContactSection, Footer, CartModal, SalesModal, FloatingButtons

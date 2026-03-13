@@ -7,9 +7,9 @@ const navLinks = [
   { label: "Kategori", href: "#categories" },
   { label: "Panel", href: "#panel" },
   { label: "Bot WhatsApp", href: "#bot" },
-  { label: "JPM", href: "#jpm" },
-  { label: "Sosial Media", href: "#sosmed" },
-  { label: "Admin", href: "#admin" },
+  { label: "Script", href: "#script" },
+  { label: "NOKOS", href: "#nokos" },
+  { label: "Sosmed", href: "#sosmed" },
   { label: "Kontak", href: "#contact" },
 ];
 

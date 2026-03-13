@@ -7,7 +7,8 @@ import CategorySection from "@/components/CategorySection";
 import SearchResults from "@/components/SearchResults";
 import PanelSection from "@/components/PanelSection";
 import BotSection from "@/components/BotSection";
-import JpmSection from "@/components/JpmSection";
+import ScriptSection from "@/components/ScriptSection";
+import NokosSection from "@/components/NokosSection";
 import SosmedSection from "@/components/SosmedSection";
 import AdminSection from "@/components/AdminSection";
 import ContactSection from "@/components/ContactSection";
@@ -34,7 +35,8 @@ export default function App() {
         <SearchResults query={searchQuery} onClear={() => setSearchQuery("")} />
         <PanelSection />
         <BotSection />
-        <JpmSection />
+        <ScriptSection />
+        <NokosSection />
         <SosmedSection />
         <AdminSection />
         <ContactSection />
