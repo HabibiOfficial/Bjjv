@@ -1,4 +1,4 @@
-import { FaCheck, FaCartPlus, FaWhatsapp, FaStar, FaFire, FaBolt } from "react-icons/fa";
+import { FaCheck, FaCartPlus, FaWhatsapp, FaStar, FaFire, FaBolt, FaShareAlt } from "react-icons/fa";
 import { panelProducts, Product } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
@@ -13,13 +13,18 @@ function PanelCard({ product }: { product: Product }) {
   const badge = product.badge ? badgeConfig[product.badge] : null;
 
   const handleBuy = () => {
-    const msg = `Halo, saya ingin membeli ${product.name} - Rp ${product.price.toLocaleString("id-ID")}`;
+    const msg = `Halo, saya ingin membeli *Panel ${product.name}* - Rp ${product.price.toLocaleString("id-ID")}/bulan`;
     window.open(`https://wa.me/628131919213?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   const handleCart = () => {
     addItem({ id: product.id, name: product.name, price: product.price });
     setIsOpen(true);
+  };
+
+  const handleShare = () => {
+    const text = `Cek Panel WhatsApp *${product.name}* di Habibi Store! Hanya Rp ${product.price.toLocaleString("id-ID")}/bulan. Server 24 jam, anti delete, anti DDOS 🔥\n\nOrder: https://wa.me/628131919213`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
@@ -43,7 +48,16 @@ function PanelCard({ product }: { product: Product }) {
       )}
 
       <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-xl font-bold text-[#1a252f] mb-1">{product.name}</h3>
+        <div className="flex items-start justify-between mb-1">
+          <h3 className="text-xl font-bold text-[#1a252f]">{product.name}</h3>
+          <button
+            onClick={handleShare}
+            title="Bagikan ke WhatsApp"
+            className="w-7 h-7 flex items-center justify-center text-gray-300 hover:text-[#25D366] transition-colors shrink-0 -mt-0.5"
+          >
+            <FaShareAlt className="text-sm" />
+          </button>
+        </div>
         <div className="text-3xl font-bold text-[#e74c3c] mb-4">
           Rp {product.price.toLocaleString("id-ID")}
           <span className="text-sm text-gray-400 font-normal">/bulan</span>

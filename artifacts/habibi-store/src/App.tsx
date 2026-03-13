@@ -6,6 +6,7 @@ import HeroSlider from "@/components/HeroSlider";
 import StatsSection from "@/components/StatsSection";
 import CategorySection from "@/components/CategorySection";
 import PanelSection from "@/components/PanelSection";
+import CompareSection from "@/components/CompareSection";
 import BotSection from "@/components/BotSection";
 import ScriptSection from "@/components/ScriptSection";
 import NokosSection from "@/components/NokosSection";
@@ -22,6 +23,9 @@ import CartModal from "@/components/CartModal";
 import SalesModal from "@/components/SalesModal";
 import SearchModal from "@/components/SearchModal";
 import FloatingButtons from "@/components/FloatingButtons";
+import WelcomeModal from "@/components/WelcomeModal";
+import SocialProofNotif from "@/components/SocialProofNotif";
+import MobileOrderBar from "@/components/MobileOrderBar";
 import NotFound from "@/components/NotFound";
 
 function useIs404() {
@@ -35,11 +39,10 @@ export default function App() {
   const is404 = useIs404();
 
   useEffect(() => {
-    const handler = () => setSearchOpen((o) => !o);
     const keydown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        handler();
+        setSearchOpen((o) => !o);
       }
     };
     window.addEventListener("keydown", keydown);
@@ -61,6 +64,7 @@ export default function App() {
         <PromoSection />
         <CategorySection />
         <PanelSection />
+        <CompareSection />
         <BotSection />
         <ScriptSection />
         <NokosSection />
@@ -76,6 +80,9 @@ export default function App() {
         <SalesModal isOpen={salesOpen} onClose={() => setSalesOpen(false)} />
         <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
         <FloatingButtons />
+        <WelcomeModal />
+        <SocialProofNotif />
+        <MobileOrderBar />
       </div>
     </CartProvider>
   );
