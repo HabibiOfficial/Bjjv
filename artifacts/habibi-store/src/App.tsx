@@ -10,6 +10,7 @@ import BotSection from "@/components/BotSection";
 import ScriptSection from "@/components/ScriptSection";
 import NokosSection from "@/components/NokosSection";
 import SosmedSection from "@/components/SosmedSection";
+import PromoSection from "@/components/PromoSection";
 import HowToOrderSection from "@/components/HowToOrderSection";
 import PaymentSection from "@/components/PaymentSection";
 import TestimoniSection from "@/components/TestimoniSection";
@@ -35,6 +36,7 @@ export default function App() {
         />
         <HeroSlider />
         <StatsSection />
+        <PromoSection />
         <CategorySection />
         <PanelSection />
         <BotSection />

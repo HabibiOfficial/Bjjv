@@ -1,6 +1,7 @@
 import { FaBolt } from "react-icons/fa";
 
 const items = [
+  "🎁 PENGGUNA BARU: Diskon 20% dengan kode NEWHABIBI20!",
   "🔥 Panel RAM 1GB hanya Rp 1.000!",
   "⚡ Bot Jaga Grup mulai Rp 2.000/hari",
   "🎯 Script Bot TANPA ENCRYPT — Bisa Dimodifikasi",
