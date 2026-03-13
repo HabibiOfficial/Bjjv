@@ -15,11 +15,10 @@ const navLinks = [
 
 interface HeaderProps {
   onSalesOpen: () => void;
-  searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  onSearchOpen: () => void;
 }
 
-export default function Header({ onSalesOpen, searchQuery, setSearchQuery }: HeaderProps) {
+export default function Header({ onSalesOpen, onSearchOpen }: HeaderProps) {
   const { count, setIsOpen } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +28,17 @@ export default function Header({ onSalesOpen, searchQuery, setSearchQuery }: Hea
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        onSearchOpen();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onSearchOpen]);
 
   return (
     <>
@@ -61,16 +71,23 @@ export default function Header({ onSalesOpen, searchQuery, setSearchQuery }: Hea
             </ul>
 
             <div className="flex items-center gap-2 shrink-0">
-              <div className="relative hidden sm:block">
-                <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 text-xs" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Cari layanan..."
-                  className="bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm rounded-full pl-8 pr-4 py-1.5 w-36 focus:w-48 focus:outline-none focus:border-[#1abc9c] focus:bg-white/15 transition-all duration-300"
-                />
-              </div>
+              <button
+                onClick={onSearchOpen}
+                className="hidden sm:flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 text-white/70 hover:text-white text-sm rounded-full pl-3 pr-3 py-1.5 transition-all duration-200 group"
+              >
+                <FaSearch className="text-xs" />
+                <span className="text-xs">Cari layanan...</span>
+                <kbd className="hidden lg:block text-[10px] bg-white/10 border border-white/20 text-white/50 px-1.5 py-0.5 rounded-md ml-1">
+                  ⌘K
+                </kbd>
+              </button>
+
+              <button
+                onClick={onSearchOpen}
+                className="sm:hidden text-white hover:text-[#1abc9c] transition-colors p-1"
+              >
+                <FaSearch className="text-lg" />
+              </button>
 
               <button
                 onClick={() => setIsOpen(true)}
@@ -115,16 +132,12 @@ export default function Header({ onSalesOpen, searchQuery, setSearchQuery }: Hea
               {link.label}
             </a>
           ))}
-          <div className="relative mt-4">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60 text-sm" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari layanan..."
-              className="bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm rounded-full pl-8 pr-4 py-2 w-48 focus:outline-none focus:border-[#1abc9c]"
-            />
-          </div>
+          <button
+            onClick={() => { setMenuOpen(false); onSearchOpen(); }}
+            className="flex items-center gap-2 mt-4 text-white/70 text-base"
+          >
+            <FaSearch /> Cari Layanan
+          </button>
         </div>
       )}
     </>

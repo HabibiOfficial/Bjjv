@@ -41,10 +41,10 @@ export default function Footer() {
               {[
                 { label: "Panel WhatsApp", href: "#panel" },
                 { label: "Bot WhatsApp", href: "#bot" },
+                { label: "Script Bot", href: "#script" },
+                { label: "NOKOS WhatsApp", href: "#nokos" },
                 { label: "Jasa Sosial Media", href: "#sosmed" },
-                { label: "Jasa Push Member", href: "#jpm" },
-                { label: "Script Bot", href: "#bot" },
-                { label: "NOKOS WhatsApp", href: "#bot" },
+                { label: "Kontak & Support", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className="hover:text-[#1abc9c] transition-colors">
@@ -63,7 +63,7 @@ export default function Footer() {
                 { label: "Kategori", href: "#categories" },
                 { label: "Harga Panel", href: "#panel" },
                 { label: "Sewa Bot", href: "#bot" },
-                { label: "Admin", href: "#admin" },
+                { label: "Sosial Media", href: "#sosmed" },
                 { label: "Kontak", href: "#contact" },
               ].map((link) => (
                 <li key={link.label}>
@@ -80,7 +80,7 @@ export default function Footer() {
             <ul className="space-y-2 text-white/60 text-sm">
               {["Syarat & Ketentuan", "Kebijakan Privasi", "Cara Order", "Pembayaran", "Testimoni", "FAQ"].map((label) => (
                 <li key={label}>
-                  <a href="#admin" className="hover:text-[#1abc9c] transition-colors">
+                  <a href="#contact" className="hover:text-[#1abc9c] transition-colors">
                     {label}
                   </a>
                 </li>
